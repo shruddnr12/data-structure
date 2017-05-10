@@ -3,27 +3,50 @@ package list;
 public class LinkedList<E> implements List<E> {
 	
 	private int size = 0;
+	private Node<E> tail = null;
 	private Node<E> head = null;
 	
 	@Override
 	public void add(E element) {
-		Node<E> newNode = new Node<E>( element );
+		final Node<E> newNode = new Node<E>( element );
 		
 		if( head == null ) {
-			head = newNode;
+			head = tail = newNode;
 		} else {
-			Node<E> x = head;
-			while( x.next != null ) {
-				x = x.next;
-			}
-			x.next = newNode;
+			tail.next = newNode;
+			tail = newNode;
 		}
-		
+
 		size++;
 	}
 
 	@Override
 	public void add(int index, E element) {
+		if( size < index || index < 0 ) {
+			throw new IndexOutOfBoundsException( "Index:" + index + ", size:" + size );
+		}
+		
+		if( index == 0 ) {   // head 삽입 
+			
+			final Node<E> newNode = new Node<E>( element, head );
+			head = newNode;
+			
+		} else if( size == index ){  //  tail 삽입 
+			
+			add( element );
+			
+		} else {  // 중간 삽입
+			
+			Node<E> x = head;
+			for( int i = 0; i < index - 1; i++ ) {
+				x = x.next;
+			}
+		
+			final Node<E> newNode = new Node<E>( element, x.next );
+			x.next = newNode;
+		}
+		
+		size++;
 	}
 
 	@Override
@@ -79,4 +102,24 @@ public class LinkedList<E> implements List<E> {
 			this.next = next;
 		}
 	}
+
+	@Override
+	public String toString() {
+		String s = "[";
+		int index = 0;
+		Node<E> x = head;
+		
+		while( x != null ) {
+			if( index++ > 0 ) {
+				s += ", ";
+			}
+			s += x.data;
+			x = x.next;
+		}
+		s += "]";
+		
+		return s;
+	}
+	
+	
 }
