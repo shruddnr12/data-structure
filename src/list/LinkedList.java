@@ -26,17 +26,17 @@ public class LinkedList<E> implements List<E> {
 			throw new IndexOutOfBoundsException( "Index:" + index + ", size:" + size );
 		}
 		
+		if( size == index ){  //  tail 삽입 
+			add( element );
+			return;
+		} 
+
 		if( index == 0 ) {   // head 삽입 
-			
+		
 			final Node<E> newNode = new Node<E>( element, head );
 			head = newNode;
-			
-		} else if( size == index ){  //  tail 삽입 
-			
-			add( element );
-			
+
 		} else {  // 중간 삽입
-			
 			Node<E> x = head;
 			for( int i = 0; i < index - 1; i++ ) {
 				x = x.next;
@@ -65,7 +65,40 @@ public class LinkedList<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
-		return null;
+		if( size <= index ) {
+			throw new IndexOutOfBoundsException( "Index:" + index + ", size:" + size );
+		}
+		
+		E element = null;
+		if( 0 == index ) {  // head 삭제
+			element = head.data;
+			Node<E> next  = head.next;
+			
+			head.data = null;
+			head.next = null;
+			head = next;
+			
+		} else { // 중간 또는 tail 삭제
+			
+			Node<E> x = head;
+			for( int i = 0; i < index - 1; i++ ) {
+				x = x.next;
+			}
+			
+			element = x.next.data;
+			Node<E> next = x.next.next;
+
+			x.next.data = null;
+			x.next.next = null;
+			x.next = next;
+			
+			if( next == null ) {
+				tail = x;
+			}
+		}
+		
+		size--;
+		return element;
 	}
 
 	@Override

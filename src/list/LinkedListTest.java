@@ -34,12 +34,14 @@ public class LinkedListTest {
 		System.out.println( list );		
 		list.add( 10, 55 );
 		System.out.println( list );		
-		list.add( 55 );
+		list.add( 66 );
 		System.out.println( list );
 		
 		// remove( index ) 테스트
-		System.out.println( "삭제 항목: " + list.remove( 0 ) );
-		System.out.println( "삭제 항목: " + list.remove( 1 ) );
+		System.out.println( "삭제 항목: " + list.remove( 0 )  );
+		System.out.println( list );
+		System.out.println( "삭제 항목: " + list.remove( 1 )  );
+		System.out.println( list );
 		System.out.println( "삭제 항목: " + list.remove( list.size() - 1  ) );
 		System.out.println( list );
 		

@@ -34,7 +34,7 @@ public class ArrayListTest {
 		System.out.println( list );		
 		list.add( 10, 55 );
 		System.out.println( list );		
-		list.add( 55 );
+		list.add( 66 );
 		System.out.println( list );
 		
 		// remove( index ) 테스트
