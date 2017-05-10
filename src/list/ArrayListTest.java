@@ -45,10 +45,7 @@ public class ArrayListTest {
 		
 		// removeAll 테스트
 		list.removeAll();
-
-		// size 연산
-		count = list.size();
-		System.out.println( "리스트 크기:" + count );
+		System.out.println( list );
 		
 		// 예외 테스트
 		try {
