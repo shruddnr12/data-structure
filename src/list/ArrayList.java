@@ -101,5 +101,32 @@ public class ArrayList<E> implements List<E> {
 		return s;
 		//return Arrays.toString(data);
 	}
+	@Override
+	public Object[] toArray() {
+		Object[] arr = new Object[ size ];
+		for( int i = 0; i < size; i++ ) {
+			arr[ i ] = data[ i ];
+		}
+		
+		return arr;
+	}
+
+	@Override
+	public Iterator<E> iterator() {
+		return new Iterator<E>(){
+			private int index = 0;
+			
+			@Override
+			public boolean hasNext() {
+				return index < size;
+			}
+
+			@Override
+			public E next() {
+				return data[ index++ ];
+			}
+		};
+	}
+
 	
 }
